@@ -42,3 +42,8 @@
 
 # vendor folder and any file in it
 /vendor/*
+
+#vim tags
+/tags
+#composer lock file
+/composer.lock
