@@ -34,8 +34,8 @@ $dispatcher->addListener('response', function (Clot\ResponseEvent $event) {
 
     $response->setContent($response->getContent().'GA CODE');
 }, -255);
-$dispatcher->addSubscriber(new Clot\ContentLengthListener());
-$dispatcher->addSubscriber(new Clot\GoogleListener());
-$framework = new Clot\Framework($matcher, $controllerResolver, $argumentResolver);
+$dispatcher->addListener('response', array(new Clot\ContentLengthListener(), 'onResponse'), -255);
+$dispatcher->addListener('response', array(new Clot\GoogleListener(), 'onResponse'));
+$framework = new Clot\Framework($dispatcher, $matcher, $controllerResolver, $argumentResolver);
 $response = $framework->handle($request);
 $response->send();
